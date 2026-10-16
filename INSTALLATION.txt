@@ -1,0 +1,100 @@
+LST Baustellen-Test v0.5 — Installation und Bedienung
+Stand: 16.10.2026
+
+Grundlage
+Direkt aus den bereitgestellten vier Dateien von v0.4 weiterentwickelt.
+Die ursprüngliche Datenbank lst-baustellen-test-v02 und alle Berichte bleiben
+bestehen. Die Datenbank erhält Version 2 und einen zusätzlichen Speicher für
+Zählerstände. Vorhandene Berichte werden nicht gelöscht oder neu nummeriert.
+
+Update auf GitHub Pages
+1. Vorher alle offenen Änderungen in v0.4 speichern. Wichtige alte Berichte
+   bei Bedarf über die bestehende Druckvorschau als PDF sichern.
+2. Dieses ZIP entpacken. In demselben GitHub-Repository und demselben
+   Veröffentlichungsordner die vier Dateien index.html, app.js, sw.js und
+   manifest.webmanifest ersetzen. Alle vier gemeinsam veröffentlichen.
+   Den Ordner LST-PWA-v0.5 NICHT zusätzlich als Unterordner hochladen.
+3. Warten, bis die GitHub-Pages-Veröffentlichung erfolgreich abgeschlossen ist.
+4. Auf dem iPad mit Internet die bisherige App unter derselben Adresse öffnen.
+   Falls noch 0.4 erscheint, vollständig schließen und erneut öffnen.
+   Auch andere offene Safari-Tabs mit derselben App schließen.
+   Bei einem Update-Hinweis zunächst Eingaben speichern, dann neu starten.
+5. Oben muss „LST – Baustellen-Test 0.5“ erscheinen. Einen alten Bericht laden
+   und Text, Zeiten, Zählerstände und Unterschrift kontrollieren.
+6. „Datensicherung herunterladen“ wählen und die JSON-Datei in „Dateien“
+   sichern. Diese enthält alle Berichte samt Unterschriften und den getrennten
+   Zählerständen. Eine automatische Wiederherstellung per Import ist noch
+   nicht enthalten; die Datei dient als vollständige Datenkopie.
+7. App einmal online laden, danach Flugmodus einschalten, App schließen,
+   neu öffnen und gespeicherte Berichte sowie Speichern/Laden prüfen.
+
+Für den Datenerhalt dieselbe Webadresse UND dieselbe bisherige App bzw.
+Browserumgebung verwenden. Safari und die Home-Bildschirm-App können getrennte
+Speicher haben. Keine Website-Daten löschen, die App nicht entfernen und
+keinen privaten Browsermodus verwenden. Das Update löscht nur alte
+LST-Programm-Caches, keine Berichtsdaten. Öffnen der HTML-Datei direkt aus
+„Dateien“ ersetzt keine Installation über HTTPS/GitHub Pages.
+Die Datenbank wurde erweitert: ein Zurückkopieren von v0.4 ist kein getesteter
+Rückweg, da v0.4 die Datenbank ausdrücklich mit Version 1 öffnet.
+
+Zeiten
+Jedes Ereignis behält ein eigenes Datum für Einsätze über Mitternacht.
+Standard ist die native Datum-/Zeitauswahl. Minuten werden in 15-Minuten-
+Schritten gespeichert. „Jetzt (¼ h)“ übernimmt die nächstgelegene Viertelstunde
+nach kaufmännischer Rundung; der Datumswechsel wird dabei berücksichtigt.
+„Tastatur / Pencil“ wechselt zur Texteingabe als HH:MM, z. B. 07:15.
+Auf dem iPad lässt sich hier auch Kritzeln mit dem Apple Pencil verwenden,
+wenn diese Funktion in iPadOS aktiviert ist. „Zeitauswahl“ schaltet zurück.
+Ein bestimmtes Apple-Drehrad kann eine Web-App nicht erzwingen. iPadOS kann
+trotz eingestellter Schrittweite andere Minuten anbieten. Neue Werte wie
+07:10 werden dann mit Hinweis abgelehnt; auf 07:00 oder 07:15 ändern.
+Unveränderte Altwerte aus v0.4 bleiben minutengenau erhalten. Änderungen an
+Uhrzeiten müssen Viertelstunden sein. Es wird nichts stillschweigend gerundet,
+ausgenommen der ausdrücklich beschriftete „Jetzt (¼ h)“-Knopf.
+
+Kompressor
+Atlas Copco XAHS 186 DD ist für neue Berichte vorausgewählt.
+Für Mietgeräte „Mietkompressor“ auswählen und eine eindeutige Bezeichnung
+mit Gerätenummer verwenden. Für dasselbe Gerät dieselbe Bezeichnung nutzen.
+Die letzten gespeicherten Endstände werden pro Gerät geführt und bleiben
+auch nach dem Löschen eines Berichts erhalten. Der zuletzt gespeicherte
+Endstand gilt; auch das erneute Speichern eines alten Berichts aktualisiert
+hier den Vorschlag. Bei v0.4-Berichten ohne Geräteangabe wird Atlas angenommen.
+Neue Berichte erhalten den letzten Endstand als editierbaren Anfangsvorschlag.
+Ein bestehender Bericht behält beim Laden seine eigenen Werte.
+Zählerstände mit Komma oder Punkt und höchstens einer Nachkommastelle eingeben.
+Das iPad wird über inputmode=decimal zur numerischen Tastatur aufgefordert.
+Vorhandene unveränderte Altwerte und daraus übernommene Anfangsvorschläge
+mit zwei Nachkommastellen bleiben erhalten und werden nicht gerundet.
+Die Differenz wird automatisch berechnet. Ein Endstand unter dem Anfangsstand
+und ungültige Zahlen verhindern das Speichern.
+Nach Änderung des Anfangsstands oder Gerätewechsel ist die Bestätigung erneut
+nötig. Vor Abschluss den Zähler am Gerät prüfen und das Bestätigungsfeld setzen.
+
+Speichern, Abschluss, Druck
+„Bericht lokal speichern“ speichert einen bearbeitbaren Entwurf, auch wenn
+Zeiten oder Zählerstände noch fehlen. Ungültige eingegebene Werte sind gesperrt.
+„Bericht abschließen“ benötigt beide Zählerstände und den bestätigten Anfang.
+Ein Abschluss bleibt wie bisher bearbeitbar; erneutes Entwurf-Speichern setzt
+den Abschlussstatus zurück. Keine unveränderliche oder rechtsverbindliche
+Archivierung. Die Druckvorschau lässt sich jederzeit ansehen; tatsächliches
+Drucken/PDF-Speichern verlangt dieselbe Zählerprüfung wie der Abschluss.
+Die Berichte sind weiterhin als Testdokumente gekennzeichnet.
+Unterschrift wahlweise nur mit Pencil oder mit Pencil/Finger; lokale
+Mehrfachspeicherung, Teamgröße, Berichtstext und Druckansicht bleiben erhalten.
+
+Prüfung auf dem echten iPad
+Die Browser-Tests ersetzen diese Geräteprüfung nicht:
+- Native Zeitwahl öffnen und Darstellung unter der vorhandenen iPadOS-Version
+  prüfen. 07:15 eingeben, zur Tastatur wechseln, mit Pencil korrigieren.
+- Sofern die native Auswahl 07:10 zulässt, Speicherhinweis prüfen.
+- Quer-/Hochformat sowie Ein-/Ausblenden der Bildschirmtastatur prüfen.
+- Zähler mit 1252,3 und 1260,0 eingeben: Differenz 7,7 h; Ende unter Anfang
+  muss abgewiesen werden. Bestätigung vor Abschluss prüfen.
+- Zweiten Tagesbericht anlegen: Endstand muss vorgeschlagen, aber unbestätigt
+  sein. Mietgerät wechseln: kein Atlas-Zählerstand darf übernommen werden.
+- Pencil-Modus: Hand/Finger dürfen nicht zeichnen. Zweiter Modus erlaubt
+  Fingerunterschrift. Unterschrift nach Speichern und Laden prüfen.
+- Drei Berichte speichern, Flugmodus einschalten, vollständig neu starten,
+  alle drei laden und einen davon ändern und erneut speichern.
+- Druckvorschau, Zurück-Schaltfläche und PDF-Ausgabe prüfen.

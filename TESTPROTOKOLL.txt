@@ -1,0 +1,34 @@
+LST v0.5 — Testprotokoll vom 16.10.2026
+
+Automatisiert: lokaler Chrome-Browser mit Touch-Konfiguration und
+820 x 1180 CSS-Pixeln, eigener lokaler HTTP-Server, echte IndexedDB und
+Service Worker. Keine Verbindung zur produktiven App, keine echten Berichte.
+
+Bestanden:
+- Original-v0.4 laden, Bericht in dessen Datenbankversion 1 speichern.
+- Vier Dateien am identischen Pfad gegen v0.5 ersetzen; Service Worker
+  aktualisieren, alten v0.4-Cache entfernen, neue Seite öffnen.
+- Datenbank-Upgrade ohne Verlust von Berichtkennung, Text, Teamgröße,
+  Unterschrift, Zeitwerten und zweistelligen Zählerwerten.
+- Alten Bericht mit 07:10 sowie 1245,75 / 1252,30 erneut speichern.
+- Mehrere Berichte getrennt speichern und wieder laden.
+- Anfangsvorschlag aus altem Endstand; neue Vorschläge sind unbestätigt.
+- Abschluss ohne Bestätigung abweisen; Änderung setzt Bestätigung zurück.
+- Endstand unter Anfang und neue Werte mit zwei Dezimalstellen abweisen.
+- Neue Zeit mit 23:44 abweisen; Texteingabe 23:45 akzeptieren.
+- Datumsübergreifende Dauer 23:45 bis 00:15 am Folgetag = 30 Minuten.
+- Abschluss mit gültigen Werten und Bestätigung speichern.
+- Atlas-Vorauswahl, unabhängige Zählerhistorie für Mietgerät Miete 42.
+- Druckvorschau enthält alte Zählerstände; Zurück zum Bericht funktioniert.
+- JSON-Sicherung enthält alle drei Testberichte und beide Gerätehistorien.
+- Pencil-Modus ignoriert Mauszeiger; zweiter Modus erlaubt Zeichnen.
+- Gespeicherte Unterschrift beim Update identisch wiederhergestellt.
+- Offline schalten, Seite schließen, neue Seite öffnen: App und alle drei
+  Berichte verfügbar; v0.4-Bericht offline erfolgreich geladen.
+- Keine JavaScript-Laufzeitfehler; kein horizontaler Überlauf bei Testbreite.
+- JavaScript-Syntaxprüfung erfolgreich.
+
+Zusätzlich: gerenderte Gesamtansicht visuell geprüft.
+Nicht geprüft: echtes iPadOS/Safari, native Apple-Zeitauswahl, tatsächliche
+Pencil-/Handballenerkennung und Bildschirmtastatur, physischer Druck/PDF-Dialog,
+produktives GitHub-Pages-Deployment. Geräteprüfliste siehe INSTALLATION.txt.
