@@ -18,12 +18,28 @@ const all=()=>transaction('readonly',s=>s.getAll());const get=id=>transaction('r
 function fresh(){currentId=null;$('#project').value='';$('#day').value=new Date().toLocaleDateString('en-CA');$('#report').value='';clearSign();$('#reports').selectedIndex=-1;say('Neuer Bericht – noch nicht gespeichert')}
 $('#new').onclick=fresh;
 async function refresh(selectId){const list=(await all()).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));const sel=$('#reports');sel.replaceChildren();for(const r of list){const opt=document.createElement('option');opt.value=r.id;opt.textContent=`${r.project||'Ohne Auftrag'} – ${r.day||'ohne Datum'} (${new Date(r.updatedAt).toLocaleString('de-DE')})`;sel.append(opt)}sel.selectedIndex=-1;if(selectId)sel.value=selectId;}
-async function loadId(id){const data=await get(id);if(!data){say('Bericht nicht gefunden');return}currentId=data.id;$('#project').value=data.project||'';$('#day').value=data.day||'';$('#report').value=data.report||'';setSign(data.signature);$('#reports').value=id;say('Bericht geladen: '+new Date(data.updatedAt).toLocaleString('de-DE'))}
+async function loadId(id){const data=await get(id);if(!data){say('Bericht nicht gefunden');return}currentId=data.id;$('#project').value=data.project||'';$('#day').value=data.day||'';$('#report').value=data.report||'';setSign(data.signature);$('#reports').value=id;say('Entwurf geladen und bearbeitbar. Änderungen mit „Bericht lokal speichern“ übernehmen. Zuletzt gespeichert: '+new Date(data.updatedAt).toLocaleString('de-DE'))}
 $('#load').onclick=async()=>{try{const id=$('#reports').value;if(!id){say('Bitte einen Bericht auswählen');return}await loadId(id)}catch(e){say('Laden fehlgeschlagen: '+e.message)}};
-$('#save').onclick=async()=>{try{const id=currentId||crypto.randomUUID(),now=new Date().toISOString();const old=currentId?await get(currentId):null;await put({id,project:$('#project').value.trim(),day:$('#day').value,report:$('#report').value,signature:canvas.toDataURL('image/png'),createdAt:old?.createdAt||now,updatedAt:now});currentId=id;await refresh(id);say('Bericht separat gespeichert: '+new Date().toLocaleString('de-DE'))}catch(e){say('Speichern fehlgeschlagen: '+e.message)}};
+$('#save').onclick=async()=>{try{const id=currentId||crypto.randomUUID(),now=new Date().toISOString();const old=currentId?await get(currentId):null;await put({id,project:$('#project').value.trim(),day:$('#day').value,report:$('#report').value,signature:canvas.toDataURL('image/png'),createdAt:old?.createdAt||now,updatedAt:now});currentId=id;await refresh(id);say((old?'Änderungen gespeichert: ':'Neuer Bericht gespeichert: ')+new Date().toLocaleString('de-DE'))}catch(e){say('Speichern fehlgeschlagen: '+e.message)}};
 $('#delete').onclick=async()=>{const id=$('#reports').value;if(!id){say('Bitte einen Bericht auswählen');return}if(!confirm('Ausgewählten Testbericht wirklich löschen?'))return;try{await remove(id);if(currentId===id)fresh();await refresh();say('Bericht gelöscht')}catch(e){say('Löschen fehlgeschlagen: '+e.message)}};
 const escapeHtml=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-$('#pdf').onclick=()=>{const w=window.open('','_blank');if(!w){say('Pop-up blockiert. Safari-Einstellungen prüfen.');return}const html=`<!doctype html><html lang="de"><meta charset="utf-8"><title>LST Testbericht</title><body style="font-family:sans-serif"><h1>LST Testbericht</h1><p><b>Auftrag:</b> ${escapeHtml($('#project').value)}</p><p><b>Datum:</b> ${escapeHtml($('#day').value)}</p><h2>Bericht</h2><p style="white-space:pre-wrap">${escapeHtml($('#report').value)}</p><h2>Unterschrift</h2><img style="max-width:100%" src="${canvas.toDataURL('image/png')}"><p>TESTDOKUMENT – kein Kundenbeleg</p></body></html>`;w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),500)};
+function showEditor(){ $('#preview').classList.remove('visible');$('#editor').classList.remove('hidden');window.scrollTo(0,0); }
+function showPreview(){
+ const box=$('#printContent');box.replaceChildren();
+ const title=document.createElement('h1');title.textContent='LST Testbericht';box.append(title);
+ const project=document.createElement('p');project.textContent='Auftrag: '+$('#project').value;box.append(project);
+ const day=document.createElement('p');day.textContent='Datum: '+$('#day').value;box.append(day);
+ const heading=document.createElement('h2');heading.textContent='Bericht';box.append(heading);
+ const report=document.createElement('p');report.textContent=$('#report').value;box.append(report);
+ const signHeading=document.createElement('h2');signHeading.textContent='Unterschrift';box.append(signHeading);
+ const img=document.createElement('img');img.alt='Unterschrift';img.src=canvas.toDataURL('image/png');box.append(img);
+ const note=document.createElement('p');note.textContent='TESTDOKUMENT – kein Kundenbeleg';box.append(note);
+ $('#editor').classList.add('hidden');$('#preview').classList.add('visible');window.scrollTo(0,0);
+}
+$('#pdf').onclick=showPreview;
+$('#back').onclick=showEditor;
+$('#print').onclick=()=>window.print();
+window.addEventListener('afterprint',()=>{ /* Vorschau bleibt mit sichtbarem Zurück-Button geöffnet */ });
 async function migrateOld(){const old=localStorage.getItem('lst-pwa-test');if(!old||localStorage.getItem('lst-v02-migrated'))return;try{const d=JSON.parse(old);const now=new Date().toISOString();await put({id:crypto.randomUUID(),project:'Übernommener Test aus Version 0.1',day:(d.savedAt||now).slice(0,10),report:d.report||'',signature:d.signature||'',createdAt:d.savedAt||now,updatedAt:now});localStorage.setItem('lst-v02-migrated','1')}catch(e){say('Übernahme alter Testdaten nicht möglich: '+e.message)}}
 (async()=>{try{db=await openDb();await migrateOld();await refresh();fresh();say('Bereit – Berichte werden getrennt gespeichert.')}catch(e){say('Lokaler Speicher nicht verfügbar: '+e.message);$('#save').disabled=true}})();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(e=>say('Offline-Installation fehlgeschlagen: '+e.message));
