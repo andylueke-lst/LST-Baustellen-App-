@@ -1,34 +1,37 @@
-LST v0.5 — Testprotokoll vom 16.10.2026
+LST v0.5.4 — Testprotokoll vom 16.10.2026
 
-Automatisiert: lokaler Chrome-Browser mit Touch-Konfiguration und
-820 x 1180 CSS-Pixeln, eigener lokaler HTTP-Server, echte IndexedDB und
-Service Worker. Keine Verbindung zur produktiven App, keine echten Berichte.
+Lokaler Chrome-Browser, Touch-Konfiguration mit 820 x 1180 CSS-Pixeln,
+echte IndexedDB/Service Worker; PDF-Inhalt zusätzlich mit pypdf geprüft.
 
 Bestanden:
-- Original-v0.4 laden, Bericht in dessen Datenbankversion 1 speichern.
-- Vier Dateien am identischen Pfad gegen v0.5 ersetzen; Service Worker
-  aktualisieren, alten v0.4-Cache entfernen, neue Seite öffnen.
-- Datenbank-Upgrade ohne Verlust von Berichtkennung, Text, Teamgröße,
-  Unterschrift, Zeitwerten und zweistelligen Zählerwerten.
-- Alten Bericht mit 07:10 sowie 1245,75 / 1252,30 erneut speichern.
-- Mehrere Berichte getrennt speichern und wieder laden.
-- Anfangsvorschlag aus altem Endstand; neue Vorschläge sind unbestätigt.
-- Abschluss ohne Bestätigung abweisen; Änderung setzt Bestätigung zurück.
-- Endstand unter Anfang und neue Werte mit zwei Dezimalstellen abweisen.
-- Neue Zeit mit 23:44 abweisen; Texteingabe 23:45 akzeptieren.
-- Datumsübergreifende Dauer 23:45 bis 00:15 am Folgetag = 30 Minuten.
-- Abschluss mit gültigen Werten und Bestätigung speichern.
-- Atlas-Vorauswahl, unabhängige Zählerhistorie für Mietgerät Miete 42.
-- Druckvorschau enthält alte Zählerstände; Zurück zum Bericht funktioniert.
-- JSON-Sicherung enthält alle drei Testberichte und beide Gerätehistorien.
-- Pencil-Modus ignoriert Mauszeiger; zweiter Modus erlaubt Zeichnen.
-- Gespeicherte Unterschrift beim Update identisch wiederhergestellt.
-- Offline schalten, Seite schließen, neue Seite öffnen: App und alle drei
-  Berichte verfügbar; v0.4-Bericht offline erfolgreich geladen.
-- Keine JavaScript-Laufzeitfehler; kein horizontaler Überlauf bei Testbreite.
-- JavaScript-Syntaxprüfung erfolgreich.
+- Update direkt vom Original v0.4: Datenbankerweiterung und Cache-Wechsel.
+- Text, Teamgröße, Unterschrift, alte Minutenwerte und zweistellige alte
+  Zählerstände bleiben erhalten; getrennte Mehrfachspeicherung.
+- Viertelstunden, Texteingabe, Übernachtung und numerische Plausibilitätsprüfung.
+- Kompressorspezifischer Anfangsvorschlag und Bestätigung.
+- Dateinamenübernahme, freie Änderungen, Original-PDF im Bericht gespeichert.
+- Ungültige PDF-Auswahl lässt bisherige Auswahl und Auftrag erhalten.
+- Kundenfelder und Mailadressen speichern und laden.
+- Offline-Neustart und Offline-Erstellung des Gesamt-PDFs.
+- Folgetag übernimmt Auftrag/Original/Mailadressen, aber keinen Bericht und
+  keine Unterschrift des Vortags.
+- Drei Tage eines Lieferscheins auswählbar; fremde Aufträge ausgeschlossen.
+- Leere Auswahl wird abgewiesen; aktueller Bericht nicht doppelt angehängt.
+- Gesamt-PDF: drei unveränderte Originalseiten plus drei Tagesberichte,
+  Datumsreihenfolge und Gesamt-Seitenzahlen 4/6, 5/6, 6/6 korrekt.
+- Zwei frühe Tagesberichte ohne Kundenname/Unterschrift akzeptiert.
+- Nur die letzte neue Berichtsseite enthält die einmalige Abschlussbestätigung
+  und Kundenunterschrift für alle beigefügten Tagesberichte.
+- Seiten 4 und 5 enthalten nur das Briefkopf-Bild, kein Unterschriftsbild oder
+  Unterschriftsfeld; Seite 6 enthält Briefkopf und finale Unterschrift.
+- Keine Uhrzeiten, Arbeitszeiten, Fahrtzeiten oder Kompressorzähler auf einer
+  der neuen Kundenseiten. Alle drei Berichtsseiten gerendert und visuell geprüft.
+- Fehlende Abschlussunterschrift blockiert die simulierte Mail-Übergabe und
+  meldet den letzten Berichtstag. Fehlende frühere Unterschriften blockieren nicht.
+- Aktuelle noch ungespeicherte Änderung erscheint genau einmal im Export.
+- Zwischenablage und Teilen-Aufruf mit PDF-Dateianhang simuliert geprüft.
+- Keine JavaScript-Laufzeitfehler im Test; Syntaxprüfung erfolgreich.
 
-Zusätzlich: gerenderte Gesamtansicht visuell geprüft.
-Nicht geprüft: echtes iPadOS/Safari, native Apple-Zeitauswahl, tatsächliche
-Pencil-/Handballenerkennung und Bildschirmtastatur, physischer Druck/PDF-Dialog,
-produktives GitHub-Pages-Deployment. Geräteprüfliste siehe INSTALLATION.txt.
+Noch auf echtem iPad zu prüfen:
+Native iPadOS-Zeitauswahl, Tastatur/Kritzeln/Pencil, Teilen → Mail, Einsetzen
+beider Empfänger und tatsächlicher PDF-Empfang. Es wurde keine E-Mail versendet.

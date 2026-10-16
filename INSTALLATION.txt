@@ -1,100 +1,115 @@
-LST Baustellen-Test v0.5 — Installation und Bedienung
+LST Baustellen-App v0.5.4 — Installation und Ablauf
 Stand: 16.10.2026
 
-Grundlage
-Direkt aus den bereitgestellten vier Dateien von v0.4 weiterentwickelt.
-Die ursprüngliche Datenbank lst-baustellen-test-v02 und alle Berichte bleiben
-bestehen. Die Datenbank erhält Version 2 und einen zusätzlichen Speicher für
-Zählerstände. Vorhandene Berichte werden nicht gelöscht oder neu nummeriert.
+UNTERSCHRIFT NUR BEI AUFTRAGSABSCHLUSS
+Tagesberichte werden während des mehrtägigen Auftrags ohne Kundenunterschrift
+geführt. Erst am Ende der gesamten Arbeiten wird einmal unterschrieben.
+Die Abschlussbestätigung bezieht sich auf die Arbeiten aus allen beigefügten
+Tagesberichten. Sie erscheint nur auf der letzten angehängten Berichtsseite.
+Auf früheren Tagesberichtsseiten gibt es kein Unterschriftsfeld.
+Arbeitszeiten, Fahrtzeiten und Kompressorzähler erscheinen auf keiner
+angehängten Kundenseite. Das Tagesdatum bleibt zur Zuordnung sichtbar.
 
-Update auf GitHub Pages
-1. Vorher alle offenen Änderungen in v0.4 speichern. Wichtige alte Berichte
-   bei Bedarf über die bestehende Druckvorschau als PDF sichern.
-2. Dieses ZIP entpacken. In demselben GitHub-Repository und demselben
-   Veröffentlichungsordner die vier Dateien index.html, app.js, sw.js und
-   manifest.webmanifest ersetzen. Alle vier gemeinsam veröffentlichen.
-   Den Ordner LST-PWA-v0.5 NICHT zusätzlich als Unterordner hochladen.
-3. Warten, bis die GitHub-Pages-Veröffentlichung erfolgreich abgeschlossen ist.
-4. Auf dem iPad mit Internet die bisherige App unter derselben Adresse öffnen.
-   Falls noch 0.4 erscheint, vollständig schließen und erneut öffnen.
-   Auch andere offene Safari-Tabs mit derselben App schließen.
-   Bei einem Update-Hinweis zunächst Eingaben speichern, dann neu starten.
-5. Oben muss „LST – Baustellen-Test 0.5“ erscheinen. Einen alten Bericht laden
-   und Text, Zeiten, Zählerstände und Unterschrift kontrollieren.
-6. „Datensicherung herunterladen“ wählen und die JSON-Datei in „Dateien“
-   sichern. Diese enthält alle Berichte samt Unterschriften und den getrennten
-   Zählerständen. Eine automatische Wiederherstellung per Import ist noch
-   nicht enthalten; die Datei dient als vollständige Datenkopie.
-7. App einmal online laden, danach Flugmodus einschalten, App schließen,
-   neu öffnen und gespeicherte Berichte sowie Speichern/Laden prüfen.
+INSTALLATION / UPDATE
+1. Offene Änderungen in der bisherigen App lokal speichern und, falls möglich,
+   mit „Datensicherung herunterladen“ eine JSON-Sicherung ablegen.
+2. ZIP entpacken und im bisherigen GitHub-Veröffentlichungsordner ersetzen:
+   index.html, app.js, pdf-export.js, sw.js, manifest.webmanifest
+   sowie die vollständigen Ordner assets und vendor.
+   Keinen zusätzlichen Ordner LST-PWA-v0.5.4 auf dem Server anlegen.
+   INSTALLATION.txt und TESTPROTOKOLL.txt sind Begleitunterlagen.
+3. Erfolgreiche GitHub-Pages-Veröffentlichung abwarten. App online öffnen,
+   andere Fenster/Tabs mit derselben App schließen und vollständig neu starten,
+   bis oben 0.5.4 steht. Alte Berichte kontrollieren.
+4. Dieselbe Adresse und dieselbe bisherige Safari-/Home-Bildschirm-App nutzen.
+   Keine Website-Daten löschen und App nicht deinstallieren. IndexedDB bleibt
+   in Version 2 erhalten; keine Datenmigration oder Löschung erforderlich.
+   Ein Rückwechsel auf v0.4 ist wegen dessen älterer Datenbankversion nicht
+   durch bloßes Zurückkopieren der Dateien möglich.
+5. Alle Dateien und Ordner werden für den Offlinebetrieb benötigt. Direkter
+   Dateiaufruf von index.html ersetzt keine Installation über HTTPS/Pages.
 
-Für den Datenerhalt dieselbe Webadresse UND dieselbe bisherige App bzw.
-Browserumgebung verwenden. Safari und die Home-Bildschirm-App können getrennte
-Speicher haben. Keine Website-Daten löschen, die App nicht entfernen und
-keinen privaten Browsermodus verwenden. Das Update löscht nur alte
-LST-Programm-Caches, keine Berichtsdaten. Öffnen der HTML-Datei direkt aus
-„Dateien“ ersetzt keine Installation über HTTPS/GitHub Pages.
-Die Datenbank wurde erweitert: ein Zurückkopieren von v0.4 ist kein getesteter
-Rückweg, da v0.4 die Datenbank ausdrücklich mit Version 1 öffnet.
+TAGESBERICHTE ERFASSEN
+1. Lexoffice-Lieferschein per AirDrop/E-Mail auf dem iPad empfangen und in
+   Dateien sichern. Im neuen Bericht unter „Lieferschein aus Lexoffice (PDF)“
+   auswählen. Auftrag wird aus dem Dateinamen ohne führendes sechsstelligen
+   Datumspräfix und ohne .pdf vorausgefüllt und bleibt frei bearbeitbar.
+2. Arbeitsbericht, Mitarbeiter, Strahlmittel, Menge, Air/Media und Düse erfassen.
+3. Zeiten und Kompressorzähler intern erfassen. Keine tägliche Kundenunterschrift
+   einholen. Mit „Bericht lokal speichern“ auch Original-PDF und Angaben sichern.
+4. „Weiterer Tag für diesen Auftrag“ speichert den bisherigen Entwurf und legt
+   einen neuen Bericht mit dem Folgedatum an. Auftrag, Original-PDF,
+   Mitarbeiternamen und E-Mail-Adressen werden übernommen. Arbeitsbericht,
+   Unterschrift, Material und Einstellungen werden neu erfasst.
+   Datum lässt sich ändern. Bei manueller Neuanlage dieselbe Lieferscheinnummer
+   verwenden, damit die Tagesberichte gemeinsam angeboten werden.
 
-Zeiten
-Jedes Ereignis behält ein eigenes Datum für Einsätze über Mitternacht.
-Standard ist die native Datum-/Zeitauswahl. Minuten werden in 15-Minuten-
-Schritten gespeichert. „Jetzt (¼ h)“ übernimmt die nächstgelegene Viertelstunde
-nach kaufmännischer Rundung; der Datumswechsel wird dabei berücksichtigt.
-„Tastatur / Pencil“ wechselt zur Texteingabe als HH:MM, z. B. 07:15.
-Auf dem iPad lässt sich hier auch Kritzeln mit dem Apple Pencil verwenden,
-wenn diese Funktion in iPadOS aktiviert ist. „Zeitauswahl“ schaltet zurück.
-Ein bestimmtes Apple-Drehrad kann eine Web-App nicht erzwingen. iPadOS kann
-trotz eingestellter Schrittweite andere Minuten anbieten. Neue Werte wie
-07:10 werden dann mit Hinweis abgelehnt; auf 07:00 oder 07:15 ändern.
-Unveränderte Altwerte aus v0.4 bleiben minutengenau erhalten. Änderungen an
-Uhrzeiten müssen Viertelstunden sein. Es wird nichts stillschweigend gerundet,
-ausgenommen der ausdrücklich beschriftete „Jetzt (¼ h)“-Knopf.
+GESAMTEN AUFTRAG ABSCHLIESSEN
+1. Den letzten Tagesbericht des Auftrags laden bzw. fertig erfassen.
+2. Erst jetzt Kundenname und Datum der Abschlussbestätigung eingeben und den
+   Kunden einmal unterschreiben lassen. Bei Bedarf Finger-Modus aktivieren.
+3. Den letzten Bericht lokal speichern. Die einmalige Abschlussunterschrift
+   wird mit diesem Bericht gespeichert; frühere Tagesberichte bleiben unsigniert.
+4. „Mehrere Tagesberichte gemeinsam anhängen“ aktivieren und alle gewünschten
+   Tage auswählen. Zunächst ist nur der aktuelle Tag angekreuzt.
+   Die Zuordnung erfolgt anhand der Lieferscheinnummer aus dem Originalnamen,
+   ersatzweise aus dem Auftrag; ohne Nummer anhand identischen Auftragsnamens.
+5. „Gesamt-PDF erstellen und herunterladen“ wählen. Originalseiten werden einmal
+   übernommen. Tagesberichte folgen nach Datum sortiert im LST-Layout.
+   Name, Datum und Unterschrift werden ausschließlich vom letzten ausgewählten
+   Tagesbericht übernommen und nur auf dessen Seite als Abschlussbestätigung
+   für alle beigefügten Berichte angezeigt. Frühere Unterschriften aus alten
+   Versionen bleiben gespeichert, werden dort aber nicht mehr ausgegeben.
+6. Fehlt die Abschlussunterschrift, kann ein PDF-Entwurf erstellt werden.
+   Die Mail-Übergabe bleibt ohne finale Bestätigung gesperrt. Frühere Tage
+   benötigen weder Kundenname noch Unterschrift.
+7. Für einen einzelnen Einsatztag die Mehrtages-Auswahl ausschalten; die
+   Abschlussbestätigung befindet sich dann auf der einzigen Berichtsseite.
 
-Kompressor
-Atlas Copco XAHS 186 DD ist für neue Berichte vorausgewählt.
-Für Mietgeräte „Mietkompressor“ auswählen und eine eindeutige Bezeichnung
-mit Gerätenummer verwenden. Für dasselbe Gerät dieselbe Bezeichnung nutzen.
-Die letzten gespeicherten Endstände werden pro Gerät geführt und bleiben
-auch nach dem Löschen eines Berichts erhalten. Der zuletzt gespeicherte
-Endstand gilt; auch das erneute Speichern eines alten Berichts aktualisiert
-hier den Vorschlag. Bei v0.4-Berichten ohne Geräteangabe wird Atlas angenommen.
-Neue Berichte erhalten den letzten Endstand als editierbaren Anfangsvorschlag.
-Ein bestehender Bericht behält beim Laden seine eigenen Werte.
-Zählerstände mit Komma oder Punkt und höchstens einer Nachkommastelle eingeben.
-Das iPad wird über inputmode=decimal zur numerischen Tastatur aufgefordert.
-Vorhandene unveränderte Altwerte und daraus übernommene Anfangsvorschläge
-mit zwei Nachkommastellen bleiben erhalten und werden nicht gerundet.
-Die Differenz wird automatisch berechnet. Ein Endstand unter dem Anfangsstand
-und ungültige Zahlen verhindern das Speichern.
-Nach Änderung des Anfangsstands oder Gerätewechsel ist die Bestätigung erneut
-nötig. Vor Abschluss den Zähler am Gerät prüfen und das Bestätigungsfeld setzen.
+Aktuelle noch ungespeicherte Änderungen des geladenen Berichts werden im
+Gesamt-PDF berücksichtigt. Andere Tage stammen aus dem lokalen Speicher.
+Lokales Speichern für spätere Bearbeitung zusätzlich durchführen.
+Ein gespeicherter aktueller Bericht wird nicht doppelt angehängt.
+Jeder Tagesbericht muss auf eine Seite passen; überlanger Text wird mit Hinweis
+abgewiesen statt abgeschnitten. Alle neuen Seiten tragen den LST-Briefkopf und
+fortlaufende Seitenzahlen des Gesamt-PDFs. Die Originalseiten bleiben unverändert,
+auch wenn sie selbst bereits Arbeitsnachweise oder Seitennummern enthalten.
 
-Speichern, Abschluss, Druck
-„Bericht lokal speichern“ speichert einen bearbeitbaren Entwurf, auch wenn
-Zeiten oder Zählerstände noch fehlen. Ungültige eingegebene Werte sind gesperrt.
-„Bericht abschließen“ benötigt beide Zählerstände und den bestätigten Anfang.
-Ein Abschluss bleibt wie bisher bearbeitbar; erneutes Entwurf-Speichern setzt
-den Abschlussstatus zurück. Keine unveränderliche oder rechtsverbindliche
-Archivierung. Die Druckvorschau lässt sich jederzeit ansehen; tatsächliches
-Drucken/PDF-Speichern verlangt dieselbe Zählerprüfung wie der Abschluss.
-Die Berichte sind weiterhin als Testdokumente gekennzeichnet.
-Unterschrift wahlweise nur mit Pencil oder mit Pencil/Finger; lokale
-Mehrfachspeicherung, Teamgröße, Berichtstext und Druckansicht bleiben erhalten.
+VERSAND ÜBER DIE IPAD-MAIL-APP
+1. LST-E-Mail und Kunden-E-Mail prüfen. LST ist mit post@lueke-strahlt.de
+   vorausgefüllt und frei änderbar. „Beide Empfänger kopieren“ wählen.
+2. „PDF teilen → Mail“ wählen und im Teilen-Menü Mail auswählen.
+3. Die kopierten Adressen in das Empfängerfeld einsetzen. Die Web-App kann
+   Mail-Empfänger zusammen mit einem Dateianhang nicht direkt vorausfüllen.
+4. Nachricht, Empfänger und vollständigen PDF-Anhang prüfen und in Mail senden.
+   Die Web-App erhält keine tatsächliche Versandbestätigung. Postausgang bzw.
+   gesendete Nachrichten in Mail kontrollieren.
+Wenn Dateiteilen nicht unterstützt wird: das heruntergeladene PDF in Dateien
+öffnen und dort Teilen → Mail auswählen. Wenn Kopieren nicht unterstützt wird,
+Adressen manuell übernehmen. Erstellung und Speicherung sind offline möglich;
+der tatsächliche Versand benötigt eine Verbindung oder erfolgt später aus Mail.
+Nach Inhalts- oder Auswahländerungen muss das Gesamt-PDF neu erstellt werden.
 
-Prüfung auf dem echten iPad
-Die Browser-Tests ersetzen diese Geräteprüfung nicht:
-- Native Zeitwahl öffnen und Darstellung unter der vorhandenen iPadOS-Version
-  prüfen. 07:15 eingeben, zur Tastatur wechseln, mit Pencil korrigieren.
-- Sofern die native Auswahl 07:10 zulässt, Speicherhinweis prüfen.
-- Quer-/Hochformat sowie Ein-/Ausblenden der Bildschirmtastatur prüfen.
-- Zähler mit 1252,3 und 1260,0 eingeben: Differenz 7,7 h; Ende unter Anfang
-  muss abgewiesen werden. Bestätigung vor Abschluss prüfen.
-- Zweiten Tagesbericht anlegen: Endstand muss vorgeschlagen, aber unbestätigt
-  sein. Mietgerät wechseln: kein Atlas-Zählerstand darf übernommen werden.
-- Pencil-Modus: Hand/Finger dürfen nicht zeichnen. Zweiter Modus erlaubt
-  Fingerunterschrift. Unterschrift nach Speichern und Laden prüfen.
-- Drei Berichte speichern, Flugmodus einschalten, vollständig neu starten,
-  alle drei laden und einen davon ändern und erneut speichern.
-- Druckvorschau, Zurück-Schaltfläche und PDF-Ausgabe prüfen.
+ZEITEN, KOMPRESSOR UND SICHERUNG
+Native Zeitwahl ist Standard, alternative Texteingabe für Tastatur/Pencil.
+Neue Uhrzeiten werden in Viertelstunden geprüft. „Jetzt (¼ h)“ rundet auf die
+nächstgelegene Viertelstunde. Datumsfelder erhalten Einsätze über Mitternacht.
+Alte unveränderte Minutenwerte bleiben bestehen. Zeiten sind ausschließlich intern.
+Atlas Copco XAHS 186 DD ist vorausgewählt. Mietgeräte eindeutig benennen.
+Letzter gespeicherter Endstand wird je Gerät als editierbarer Anfangsvorschlag
+übernommen; vor Abschluss bestätigen. Neue Werte mit höchstens einer
+Dezimalstelle; alte unveränderte Werte mit zwei Dezimalstellen bleiben erhalten.
+Ende unter Anfang ist gesperrt, Differenz wird automatisch berechnet.
+Entwürfe können unvollständig, aber nicht mit ungültigen Eingaben gespeichert
+werden. Vor Abschluss/PDF beide Zählerstände und Anfangsbestätigung ergänzen.
+JSON-Sicherung enthält Berichte, Original-PDFs, Unterschriften, Kunden-/Mailangaben
+und Gerätehistorien. Noch keine automatische Importfunktion.
+
+VOR EINSATZ AUF DEM ECHTEN IPAD PRÜFEN
+- Alte Berichte sowie PDF-Auswahl und Dateinamenübernahme kontrollieren.
+- Mehrere Tage ohne Unterschrift speichern, erst letzten Tag unterschreiben.
+- Gesamt-PDF: nur eine finale Unterschrift, keine Arbeits-/Fahrtzeiten.
+- Native Zeitwahl, Pencil/Finger und numerische Tastatur ausprobieren.
+- Drei Berichte im Flugmodus nach vollständigem App-Neustart wieder laden.
+- Mit Testadressen PDF an beide Empfänger über Mail senden und Empfang prüfen.
+  Hier wurden nur Browser-/PDF-Tests ausgeführt; keine E-Mail wurde versendet.
